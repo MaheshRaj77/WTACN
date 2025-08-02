@@ -7,7 +7,7 @@ const experiments = [
     category: "Web Technology",
     difficulty: "Beginner",
     estimatedTime: "2-3 hours",
-    path: "../../exp-1/index.html"
+    path: "exp-1/index.html"
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const experiments = [
     category: "Web Technology",
     difficulty: "Intermediate",
     estimatedTime: "3-4 hours",
-    path: "../../exp-2/index.html"
+    path: "exp-2/index.html"
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const experiments = [
     category: "Web Technology",
     difficulty: "Intermediate",
     estimatedTime: "4-5 hours",
-    path: "../../exp-3/index.html"
+    path: "exp-3/index.html"
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const experiments = [
     category: "Web Technology",
     difficulty: "Advanced",
     estimatedTime: "5-6 hours",
-    path: "../../exp-4/index.html"
+    path: "exp-4/index.html"
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const experiments = [
     category: "Web Technology",
     difficulty: "Advanced",
     estimatedTime: "6-8 hours",
-    path: "../../exp-5/index.html"
+    path: "exp-5/index.html"
   },
   // Computer Networks Experiments
   {
@@ -53,7 +53,7 @@ const experiments = [
     category: "Computer Networks",
     difficulty: "Intermediate",
     estimatedTime: "3-4 hours",
-    path: "../../exp-6/index.html"
+    path: "exp-6/index.html"
   },
   {
     id: 7,
@@ -62,7 +62,7 @@ const experiments = [
     category: "Computer Networks",
     difficulty: "Advanced",
     estimatedTime: "4-5 hours",
-    path: "../../exp-7/index.html"
+    path: "exp-7/index.html"
   },
   {
     id: 8,
@@ -71,7 +71,7 @@ const experiments = [
     category: "Computer Networks",
     difficulty: "Advanced",
     estimatedTime: "5-6 hours",
-    path: "../../exp-8/index.html"
+    path: "exp-8/index.html"
   },
   {
     id: 9,
@@ -80,7 +80,7 @@ const experiments = [
     category: "Computer Networks",
     difficulty: "Advanced",
     estimatedTime: "4-5 hours",
-    path: "../../exp-9/index.html"
+    path: "exp-9/index.html"
   },
   {
     id: 10,
@@ -89,7 +89,7 @@ const experiments = [
     category: "Computer Networks",
     difficulty: "Expert",
     estimatedTime: "6-7 hours",
-    path: "../../exp-10/index.html"
+    path: "exp-10/index.html"
   },
 ];
 
