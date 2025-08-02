@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Tag Explorer</title>
+  <link rel="stylesheet" href="style1.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Left Panel: Tag Explorer -->
+    <div class="panel panel-left">
+      <div class="header">
+        <h1>HTML Tag Explorer</h1>
+        <p>Explore and preview common HTML tags</p>
+      </div>
+      <input
+        type="text"
+        id="searchBox"
+        class="search-box"
+        placeholder="🔍 Search tags..."
+      />
+      <div id="tagCategories"></div>
+    </div>
+
+    <!-- Right Panel: Preview & Editor -->
+    <div class="panel panel-right">
+      <div class="output-content split-view">
+        <!-- Live Preview -->
+        <div class="window">
+          <div class="window-header">
+            <div class="window-controls">
+              <span class="control red"></span>
+              <span class="control yellow"></span>
+              <span class="control green"></span>
+            </div>
+            <div class="window-title">Live Preview</div>
+          </div>
+          <div id="previewOutput" class="preview-box"></div>
+        </div>
+
+        <!-- Code Editor -->
+        <div class="window">
+          <div class="window-header">
+            <div class="window-controls">
+              <span class="control red"></span>
+              <span class="control yellow"></span>
+              <span class="control green"></span>
+            </div>
+            <div class="window-title">Code Editor</div>
+          </div>
+          <textarea
+            id="htmlEditor"
+            class="code-box"
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>

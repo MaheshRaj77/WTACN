@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSSC 513 Lab Dashboard — v1.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dashboard-files/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen text-white font-inter overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-indigo-900/20"></div>
+      <div class="floating-shapes"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="relative z-10 backdrop-blur-xl bg-white/5 border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+              <i class="fas fa-code text-white text-lg"></i>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                CSSC 513 Laboratory
+              </h1>
+              <p class="text-sm text-gray-400">Advanced Computing Lab</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button id="theme-toggle" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+              <i class="fas fa-moon"></i>
+            </button>
+            <div class="flex items-center space-x-3 bg-white/10 rounded-xl px-4 py-2">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold text-sm">
+                M
+              </div>
+              <div class="hidden md:block">
+                <div class="text-sm font-medium">Mahesh</div>
+                <div class="text-xs text-gray-400">21384114</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative z-10 py-20 px-6">
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="mb-8">
+          <h1 class="text-6xl md:text-8xl font-black bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 bg-clip-text text-transparent mb-4 leading-tight">
+            LAB PORTAL
+          </h1>
+          <div class="flex items-center justify-center space-x-4 mb-6">
+            <div class="h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent flex-1"></div>
+            <span class="text-purple-400 font-mono text-lg">v1.0</span>
+            <div class="h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent flex-1"></div>
+          </div>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Web Technology & Computer Networks Laboratory
+            <br>
+            <span class="text-purple-400 font-semibold">Int. M.Sc. 5th Year • 2025-26</span>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pb-20">
+      <!-- Statistics Dashboard -->
+      <section class="mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <!-- Total Experiments -->
+          <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                <i class="fas fa-flask text-blue-400 text-xl"></i>
+              </div>
+              <span class="text-2xl font-bold">10</span>
+            </div>
+            <h3 class="text-sm font-medium text-gray-400 mb-1">Total Experiments</h3>
+            <p class="text-xs text-gray-500">Across all categories</p>
+          </div>
+          
+          <!-- Completed -->
+          <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+                <i class="fas fa-check-circle text-green-400 text-xl"></i>
+              </div>
+              <span id="complete-count" class="text-2xl font-bold text-green-400">0</span>
+            </div>
+            <h3 class="text-sm font-medium text-gray-400 mb-1">Completed</h3>
+            <p class="text-xs text-gray-500">Successfully finished</p>
+          </div>
+          
+          <!-- Pending -->
+          <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center">
+                <i class="fas fa-clock text-orange-400 text-xl"></i>
+              </div>
+              <span id="incomplete-count" class="text-2xl font-bold text-orange-400">10</span>
+            </div>
+            <h3 class="text-sm font-medium text-gray-400 mb-1">Pending</h3>
+            <p class="text-xs text-gray-500">Awaiting completion</p>
+          </div>
+          
+          <!-- Progress -->
+          <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                <i class="fas fa-chart-line text-purple-400 text-xl"></i>
+              </div>
+              <span id="progress-percentage" class="text-2xl font-bold text-purple-400">0%</span>
+            </div>
+            <h3 class="text-sm font-medium text-gray-400 mb-1">Overall Progress</h3>
+            <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+              <div id="progress-bar" class="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experiments Section -->
+      <section>
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-black text-white mb-4">Laboratory Experiments</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mb-6"></div>
+          <p class="text-gray-400 text-lg max-w-xl mx-auto">Complete your practical assignments and track your learning journey</p>
+          
+          <!-- Filter Controls -->
+          <div class="flex justify-center items-center space-x-4 mt-8">
+            <div class="relative">
+              <select id="filter-status" class="appearance-none bg-gray-800/50 border-2 border-gray-700 rounded-full px-6 py-3 pr-10 text-white font-medium focus:border-purple-400 focus:outline-none cursor-pointer">
+                <option value="all">📚 All Labs</option>
+                <option value="completed">✅ Completed</option>
+                <option value="incomplete">⏳ Pending</option>
+              </select>
+              <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <i class="fas fa-chevron-down text-gray-400"></i>
+              </div>
+            </div>
+            <button class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 px-6 py-3 rounded-full font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              🔄 Refresh
+            </button>
+          </div>
+        </div>
+        
+        <!-- Experiments Grid -->
+        <div class="space-y-12">
+          <!-- Web Technology Labs -->
+          <div class="relative">
+            <div class="flex items-center mb-8">
+              <div class="bg-gradient-to-r from-blue-600 to-cyan-500 p-4 rounded-2xl shadow-lg mr-4">
+                <i class="fas fa-code text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Web Development Track</h3>
+                <p class="text-gray-400">Frontend, Backend & Full-Stack Development</p>
+              </div>
+              <div class="ml-auto bg-blue-900/30 px-4 py-2 rounded-full">
+                <span class="text-blue-400 font-semibold">5 Labs</span>
+              </div>
+            </div>
+            <div id="web-experiments" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+          </div>
+          
+          <!-- Computer Networks Labs -->
+          <div class="relative">
+            <div class="flex items-center mb-8">
+              <div class="bg-gradient-to-r from-purple-600 to-pink-500 p-4 rounded-2xl shadow-lg mr-4">
+                <i class="fas fa-network-wired text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Network Engineering Track</h3>
+                <p class="text-gray-400">Network Security, Protocols & Infrastructure</p>
+              </div>
+              <div class="ml-auto bg-purple-900/30 px-4 py-2 rounded-full">
+                <span class="text-purple-400 font-semibold">5 Labs</span>
+              </div>
+            </div>
+            <div id="network-experiments" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/10 bg-white/5 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div class="mb-4 md:mb-0">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+                <i class="fas fa-code text-white text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold">CSSC 513 Laboratory Portal</p>
+                <p class="text-xs text-gray-400">Advanced Computing Environment</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-6 text-sm text-gray-400">
+            <span>&copy; 2025 Mahesh</span>
+            <span>•</span>
+            <span>Int. M.Sc. 5th Year</span>
+            <span>•</span>
+            <span class="text-purple-400">v1.0</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="dashboard-files/dashboard.js"></script>
+  </body>
+</html>
