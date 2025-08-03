@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Book Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="js/cart.js" defer></script>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-blue-800 text-white p-4 flex justify-between items-center">
+    <div class="text-xl font-bold flex items-center">
+      <i class="fas fa-book-open text-2xl mr-2"></i>
+      <span>College Book Store</span>
+    </div>
+    <nav class="hidden md:flex space-x-4">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline font-bold">Login</a>
+      <a href="registration.html" class="hover:underline">Register</a>
+      <a href="catalogue.html" class="hover:underline">Catalogue</a>
+    </nav>
+    <button class="md:hidden text-white">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div class="hidden bg-blue-700 text-white p-4 md:hidden">
+    <nav class="flex flex-col space-y-2">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline font-bold">Login</a>
+      <a href="registration.html" class="hover:underline">Register</a>
+      <a href="catalogue.html" class="hover:underline">Catalogue</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-grow flex items-center justify-center bg-gradient-to-b from-gray-100 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+      <div class="text-center">
+        <i class="fas fa-user-circle text-blue-800 text-6xl"></i>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Welcome Back!</h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+          Sign in to access your account and browse our collection
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <form class="space-y-6" action="#" method="POST">
+          <div>
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-user text-gray-400"></i>
+              </div>
+              <input id="username" name="username" type="text" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Enter your username" />
+            </div>
+          </div>
+          
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-lock text-gray-400"></i>
+              </div>
+              <input id="password" name="password" type="password" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Enter your password" />
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <button type="button" id="togglePassword" class="text-gray-400 hover:text-gray-600">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+              <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                Remember me
+              </label>
+            </div>
+
+            <div class="text-sm">
+              <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
+                Forgot password?
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <i class="fas fa-sign-in-alt"></i>
+              </span>
+              Sign in
+            </button>
+          </div>
+        </form>
+        
+
+      </div>
+      
+      <div class="text-center">
+        <p class="text-sm text-gray-600">
+          Don't have an account? 
+          <a href="registration.html" class="font-medium text-blue-600 hover:text-blue-500">
+            Sign up now
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-white/10 bg-blue-800 text-white backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+              <i class="fas fa-code text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="font-semibold">CSSC 513 Laboratory Portal</p>
+              <p class="text-xs text-gray-300">Advanced Computing Environment</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-6 text-sm text-gray-300">
+          <span>&copy; 2025 Mahesh</span>
+          <span>•</span>
+          <span>Int. M.Sc. 5th Year</span>
+          <span>•</span>
+          <span class="text-purple-300">v1.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuButton = document.querySelector('.fa-bars').parentElement;
+      const mobileMenu = document.querySelector('.bg-blue-700.p-4');
+      
+      menuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      // Password toggle
+      const togglePassword = document.getElementById('togglePassword');
+      const password = document.getElementById('password');
+      
+      togglePassword.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Toggle icon
+        togglePassword.querySelector('i').classList.toggle('fa-eye');
+        togglePassword.querySelector('i').classList.toggle('fa-eye-slash');
+      });
+    });
+  </script>
+</body>
+</html>

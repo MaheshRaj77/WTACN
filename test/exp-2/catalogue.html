@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue - Online Book Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="js/bookData.js" defer></script>
+  <script src="js/cart.js" defer></script>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-blue-800 text-white p-4 flex justify-between items-center">
+    <div class="text-xl font-bold flex items-center">
+      <i class="fas fa-book-open text-2xl mr-2"></i>
+      <span>College Book Store</span>
+    </div>
+    <nav class="hidden md:flex space-x-4">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline">Login</a>
+      <a href="registration.html" class="hover:underline">Register</a>
+      <a href="catalogue.html" class="hover:underline font-bold">Catalogue</a>
+    </nav>
+    <button class="md:hidden text-white">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div class="hidden bg-blue-700 text-white p-4 md:hidden">
+    <nav class="flex flex-col space-y-2">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="login.html" class="hover:underline">Login</a>
+      <a href="registration.html" class="hover:underline">Register</a>
+      <a href="catalogue.html" class="hover:underline font-bold">Catalogue</a>
+    </nav>
+  </div>
+
+  <!-- Page Header -->
+  <div class="bg-gradient-to-r from-blue-700 to-purple-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold">Book Catalogue</h1>
+      <p class="mt-2">Browse our extensive collection of academic resources</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col lg:flex-row">
+      <!-- Sidebar Categories -->
+      <aside class="w-full lg:w-64 bg-white rounded-lg shadow-md p-6 mb-6 lg:mb-0 lg:mr-6 sticky top-4 self-start">
+        <h2 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+          <i class="fas fa-list-ul mr-2 text-blue-600"></i>
+          Categories
+        </h2>
+        <ul class="space-y-2 mb-8">
+          <li class="hover:bg-blue-50 rounded-md transition duration-150">
+            <button onclick="loadCategory('CSE')" class="w-full text-left px-3 py-2 text-blue-600 hover:text-blue-800 flex items-center">
+              <i class="fas fa-laptop-code mr-2"></i>
+              <span>Computer Science</span>
+            </button>
+          </li>
+          <li class="hover:bg-blue-50 rounded-md transition duration-150">
+            <button onclick="loadCategory('ECE')" class="w-full text-left px-3 py-2 text-blue-600 hover:text-blue-800 flex items-center">
+              <i class="fas fa-microchip mr-2"></i>
+              <span>Electronics</span>
+            </button>
+          </li>
+          <li class="hover:bg-blue-50 rounded-md transition duration-150">
+            <button onclick="loadCategory('EEE')" class="w-full text-left px-3 py-2 text-blue-600 hover:text-blue-800 flex items-center">
+              <i class="fas fa-bolt mr-2"></i>
+              <span>Electrical</span>
+            </button>
+          </li>
+          <li class="hover:bg-blue-50 rounded-md transition duration-150">
+            <button onclick="loadCategory('CIVIL')" class="w-full text-left px-3 py-2 text-blue-600 hover:text-blue-800 flex items-center">
+              <i class="fas fa-building mr-2"></i>
+              <span>Civil Engineering</span>
+            </button>
+          </li>
+          <li class="hover:bg-blue-50 rounded-md transition duration-150">
+            <button onclick="loadCategory('All')" class="w-full text-left px-3 py-2 text-blue-600 hover:text-blue-800 flex items-center">
+              <i class="fas fa-book mr-2"></i>
+              <span>All Books</span>
+            </button>
+          </li>
+        </ul>
+        
+        <div class="border-t border-gray-200 pt-6">
+          <h2 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+            <i class="fas fa-filter mr-2 text-blue-600"></i>
+            Filter Options
+          </h2>
+          <div class="space-y-5">
+            <div>
+              <label for="priceRange" class="block text-sm font-medium text-gray-700 mb-2">
+                Max Price: <span id="priceValue" class="text-blue-600 font-bold">₹2000</span>
+              </label>
+              <input type="range" id="priceRange" min="100" max="2000" step="100" value="2000" class="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer">
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>₹100</span>
+                <span>₹2000</span>
+              </div>
+            </div>
+            
+            <div>
+              <label for="sortBy" class="block text-sm font-medium text-gray-700 mb-2">Sort By:</label>
+              <div class="relative">
+                <select id="sortBy" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md bg-white border appearance-none">
+                  <option value="title">Title (A-Z)</option>
+                  <option value="title-desc">Title (Z-A)</option>
+                  <option value="price-asc">Price (Low to High)</option>
+                  <option value="price-desc">Price (High to Low)</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+            
+            <button id="applyFilters" class="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 flex items-center justify-center">
+              <i class="fas fa-search mr-2"></i>
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Catalogue Area -->
+      <main class="flex-1" id="catalogue-content">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-800" id="category-title">All Books</h2>
+            <p class="text-gray-600" id="results-count">Showing all available books</p>
+          </div>
+          
+          <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Books will be displayed here -->
+            <div class="text-center text-gray-500 py-12 col-span-full">
+              <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+              <p>Loading books...</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-white/10 bg-blue-800 text-white backdrop-blur-xl mt-auto">
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="font-bold text-lg mb-4">College Book Store</h3>
+          <p class="text-gray-300 text-sm">Your one-stop shop for all academic books and resources for engineering students.</p>
+        </div>
+        <div>
+          <h3 class="font-bold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="index.html" class="hover:text-white">Home</a></li>
+            <li><a href="catalogue.html" class="hover:text-white">Catalogue</a></li>
+            <li><a href="login.html" class="hover:text-white">Login</a></li>
+            <li><a href="registration.html" class="hover:text-white">Register</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold mb-4">Categories</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="javascript:void(0)" onclick="loadCategory('CSE')" class="hover:text-white">CSE</a></li>
+            <li><a href="javascript:void(0)" onclick="loadCategory('ECE')" class="hover:text-white">ECE</a></li>
+            <li><a href="javascript:void(0)" onclick="loadCategory('EEE')" class="hover:text-white">EEE</a></li>
+            <li><a href="javascript:void(0)" onclick="loadCategory('CIVIL')" class="hover:text-white">CIVIL</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold mb-4">Contact Us</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><i class="fas fa-envelope mr-2"></i> support@collegebooks.com</li>
+            <li><i class="fas fa-phone mr-2"></i> +91 123-456-7890</li>
+            <li><i class="fas fa-map-marker-alt mr-2"></i> University Campus, Building 3</li>
+          </ul>
+          <div class="flex space-x-4 mt-4">
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+              <i class="fas fa-code text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="font-semibold">CSSC 513 Laboratory Portal</p>
+              <p class="text-xs text-gray-300">Advanced Computing Environment</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-6 text-sm text-gray-300">
+          <span>&copy; 2025 Mahesh</span>
+          <span>•</span>
+          <span>Int. M.Sc. 5th Year</span>
+          <span>•</span>
+          <span class="text-purple-300">v1.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuButton = document.querySelector('.fa-bars').parentElement;
+      const mobileMenu = document.querySelector('.bg-blue-700.p-4');
+      
+      menuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    });
+  </script>
+
+</body>
+</html>
