@@ -6,7 +6,7 @@ const books = [
     author: "Thomas H. Cormen",
     price: 799,
     category: "CSE",
-    image: "https://via.placeholder.com/300x400?text=DSA",
+    image: "https://cdn.kobo.com/book-images/2b3da037-8aef-44b8-a11d-89ce0b61d71b/1200/1200/False/algorithms-unlocked-1.jpg",
     rating: 4.8,
     description: "A comprehensive guide to data structures and algorithm analysis in C++."
   },
@@ -86,7 +86,7 @@ const books = [
     author: "M.S. Shetty",
     price: 899,
     category: "CIVIL",
-    image: "https://via.placeholder.com/300x400?text=Concrete",
+    image: "https://www.schandpublishing.com/Handler/ImageHandler.ashx?width=314&height=404&imgpath=~/Upload/BookImage/9789352533800.jpg",
     rating: 4.6,
     description: "Properties, testing, and applications of concrete materials."
   }
