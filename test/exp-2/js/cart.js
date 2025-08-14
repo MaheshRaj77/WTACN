@@ -1,5 +1,14 @@
 // Shopping cart functionality
 let cart = JSON.parse(localStorage.getItem('bookCart')) || [];
+let appliedCoupon = null;
+
+// Constants for tax and discounts
+const GST_RATE = 0.18; // 18% GST
+const COUPONS = {
+  'WELCOME10': { type: 'percentage', value: 10 },
+  'FLAT100': { type: 'fixed', value: 100 },
+  'BOOKS25': { type: 'percentage', value: 25, minPurchase: 500 }
+};
 
 // Update cart count badge
 function updateCartBadge() {
@@ -76,15 +85,79 @@ function updateQuantity(bookId, newQuantity) {
   }
 }
 
-// Calculate cart total
-function calculateTotal() {
+// Calculate cart subtotal (before GST and discounts)
+function calculateSubtotal() {
   return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 }
 
-// Show notification
-function showNotification(message) {
+// Calculate GST amount
+function calculateGST(subtotal) {
+  return subtotal * GST_RATE;
+}
+
+// Apply coupon and calculate discount
+function applyCoupon(code) {
+  const coupon = COUPONS[code];
+  if (!coupon) {
+    showNotification('Invalid coupon code', 'error');
+    return 0;
+  }
+  
+  const subtotal = calculateSubtotal();
+  
+  // Check minimum purchase if specified
+  if (coupon.minPurchase && subtotal < coupon.minPurchase) {
+    showNotification(`Minimum purchase of ₹${coupon.minPurchase} required for this coupon`, 'error');
+    return 0;
+  }
+  
+  let discount = 0;
+  if (coupon.type === 'percentage') {
+    discount = subtotal * (coupon.value / 100);
+  } else if (coupon.type === 'fixed') {
+    discount = coupon.value;
+  }
+  
+  appliedCoupon = {
+    code: code,
+    discount: discount
+  };
+  
+  showNotification(`Coupon applied: ₹${discount.toFixed(2)} discount`, 'success');
+  return discount;
+}
+
+// Remove applied coupon
+function removeCoupon() {
+  appliedCoupon = null;
+  renderCart();
+  showNotification('Coupon removed', 'info');
+}
+
+// Calculate cart total with GST and discounts
+function calculateTotal() {
+  const subtotal = calculateSubtotal();
+  const gst = calculateGST(subtotal);
+  
+  // Calculate discount
+  let discount = 0;
+  if (appliedCoupon) {
+    discount = appliedCoupon.discount;
+  }
+  
+  return subtotal + gst - discount;
+}
+
+// Show notification with type (success, error, info)
+function showNotification(message, type = 'success') {
+  const colorClass = {
+    'success': 'bg-green-500',
+    'error': 'bg-red-500',
+    'info': 'bg-blue-500'
+  }[type] || 'bg-green-500';
+  
   const notification = document.createElement('div');
-  notification.className = 'fixed bottom-20 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transform transition-transform duration-500 z-50';
+  notification.className = `fixed bottom-20 right-4 ${colorClass} text-white px-4 py-2 rounded-lg shadow-lg transform transition-transform duration-500 z-50`;
   notification.textContent = message;
   document.body.appendChild(notification);
   
@@ -116,9 +189,34 @@ function openCartPopup() {
           <!-- Cart items will be rendered here -->
         </div>
         <div class="p-4 border-t">
-          <div class="flex justify-between font-bold text-lg mb-4">
+          <!-- Coupon code input -->
+          <div class="mb-4 flex space-x-2">
+            <input type="text" id="coupon-input" placeholder="Enter coupon code" 
+              class="border rounded px-2 py-1 flex-grow">
+            <button onclick="handleCoupon()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded">
+              Apply
+            </button>
+          </div>
+          
+          <!-- Price breakdown -->
+          <div class="space-y-2 text-sm mb-4">
+            <div class="flex justify-between">
+              <span>Subtotal:</span>
+              <span id="cart-subtotal">₹0</span>
+            </div>
+            <div class="flex justify-between">
+              <span>GST (18%):</span>
+              <span id="cart-gst">₹0</span>
+            </div>
+            <div id="discount-row" class="flex justify-between text-green-600" style="display:none">
+              <span>Discount:</span>
+              <span id="cart-discount">-₹0</span>
+            </div>
+          </div>
+          
+          <div class="flex justify-between font-bold text-lg mb-4 pt-2 border-t">
             <span>Total:</span>
-            <span id="cart-total">₹${calculateTotal()}</span>
+            <span id="cart-total">₹0</span>
           </div>
           <div class="flex space-x-2">
             <button onclick="closeCartPopup()" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded w-1/2">
@@ -139,18 +237,37 @@ function openCartPopup() {
   }
 }
 
-// Close cart popup
-function closeCartPopup() {
-  const cartPopup = document.getElementById('cart-popup');
-  if (cartPopup) {
-    cartPopup.style.display = 'none';
+// Handle coupon application or removal
+function handleCoupon() {
+  const couponInput = document.getElementById('coupon-input');
+  
+  if (appliedCoupon) {
+    // Remove existing coupon
+    removeCoupon();
+    couponInput.value = '';
+    couponInput.placeholder = 'Enter coupon code';
+    return;
   }
+  
+  const code = couponInput.value.trim().toUpperCase();
+  if (!code) {
+    showNotification('Please enter a coupon code', 'error');
+    return;
+  }
+  
+  applyCoupon(code);
+  renderCart();
 }
 
 // Render cart items
 function renderCart() {
   const cartItemsContainer = document.getElementById('cart-items');
+  const cartSubtotal = document.getElementById('cart-subtotal');
+  const cartGST = document.getElementById('cart-gst');
+  const cartDiscount = document.getElementById('cart-discount');
+  const discountRow = document.getElementById('discount-row');
   const cartTotal = document.getElementById('cart-total');
+  const couponInput = document.getElementById('coupon-input');
   
   if (cartItemsContainer) {
     if (cart.length === 0) {
@@ -183,9 +300,30 @@ function renderCart() {
       });
     }
     
-    if (cartTotal) {
-      cartTotal.textContent = `₹${calculateTotal()}`;
+    // Update price breakdown
+    const subtotal = calculateSubtotal();
+    const gst = calculateGST(subtotal);
+    const discount = appliedCoupon ? appliedCoupon.discount : 0;
+    const total = subtotal + gst - discount;
+    
+    if (cartSubtotal) cartSubtotal.textContent = `₹${subtotal.toFixed(2)}`;
+    if (cartGST) cartGST.textContent = `₹${gst.toFixed(2)}`;
+    
+    if (discountRow && cartDiscount) {
+      if (appliedCoupon) {
+        discountRow.style.display = 'flex';
+        cartDiscount.textContent = `-₹${discount.toFixed(2)}`;
+        
+        if (couponInput) {
+          couponInput.value = appliedCoupon.code;
+          couponInput.placeholder = 'Remove coupon';
+        }
+      } else {
+        discountRow.style.display = 'none';
+      }
     }
+    
+    if (cartTotal) cartTotal.textContent = `₹${total.toFixed(2)}`;
   }
 }
 

@@ -7,6 +7,39 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="js/cart.js" defer></script>
+  <style>
+    .error-message {
+      color: #e53e3e;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    .input-error {
+      border-color: #e53e3e !important;
+    }
+    
+    .shake-animation {
+      animation: shake 0.5s;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    .valid-feedback {
+      color: #48bb78;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    .input-valid {
+      border-color: #48bb78 !important;
+    }
+  </style>
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen">
 
@@ -48,7 +81,7 @@
         </p>
       </div>
       <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-        <form class="space-y-6" action="#" method="POST">
+        <form id="registrationForm" class="space-y-6" action="#" method="POST" novalidate>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
@@ -58,6 +91,7 @@
                 </div>
                 <input id="firstName" name="firstName" type="text" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="First name" />
               </div>
+              <span id="firstNameError" class="error-message">First name should contain alphabets only</span>
             </div>
             
             <div>
@@ -68,6 +102,7 @@
                 </div>
                 <input id="lastName" name="lastName" type="text" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Last name" />
               </div>
+              <span id="lastNameError" class="error-message">Last name should contain alphabets only</span>
             </div>
           </div>
           
@@ -79,6 +114,7 @@
               </div>
               <input id="email" name="email" type="email" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="email@example.com" />
             </div>
+            <span id="emailError" class="error-message">Please enter a valid email (e.g., name@domain.com)</span>
           </div>
           
           <div>
@@ -89,6 +125,7 @@
               </div>
               <input id="username" name="username" type="text" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Choose a username" />
             </div>
+            <span id="usernameError" class="error-message">Username should be at least 4 characters</span>
           </div>
           
           <div>
@@ -104,6 +141,7 @@
                 </button>
               </div>
             </div>
+            <span id="passwordError" class="error-message">Password must be at least 6 characters</span>
             <p class="mt-1 text-xs text-gray-500">Password must be at least 8 characters with uppercase, lowercase, and numbers</p>
           </div>
           
@@ -115,6 +153,7 @@
               </div>
               <input id="confirmPassword" name="confirmPassword" type="password" required class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Confirm your password" />
             </div>
+            <span id="confirmPasswordError" class="error-message">Passwords do not match</span>
           </div>
           
           <div>
@@ -125,6 +164,7 @@
               </div>
               <input id="phone" name="phone" type="tel" class="pl-10 appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="Phone number (optional)" />
             </div>
+            <span id="phoneError" class="error-message">Phone number should contain exactly 10 digits</span>
           </div>
 
           <div class="flex items-center">
@@ -133,6 +173,7 @@
               I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a>
             </label>
           </div>
+          <span id="termsError" class="error-message">You must agree to the terms and conditions</span>
 
           <div>
             <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
@@ -194,15 +235,226 @@
       
       // Password toggle
       const togglePassword = document.getElementById('togglePassword');
-      const password = document.getElementById('password');
+      const passwords = document.getElementById('password');
       
       togglePassword.addEventListener('click', function() {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
+        const type = passwords.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwords.setAttribute('type', type);
         
         // Toggle icon
         togglePassword.querySelector('i').classList.toggle('fa-eye');
         togglePassword.querySelector('i').classList.toggle('fa-eye-slash');
+      });
+
+      // Form validation
+      const form = document.getElementById('registrationForm');
+      
+      // Input fields
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const email = document.getElementById('email');
+      const username = document.getElementById('username');
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirmPassword');
+      const phone = document.getElementById('phone');
+      const terms = document.getElementById('terms');
+      
+      // Error messages
+      const firstNameError = document.getElementById('firstNameError');
+      const lastNameError = document.getElementById('lastNameError');
+      const emailError = document.getElementById('emailError');
+      const usernameError = document.getElementById('usernameError');
+      const passwordError = document.getElementById('passwordError');
+      const confirmPasswordError = document.getElementById('confirmPasswordError');
+      const phoneError = document.getElementById('phoneError');
+      const termsError = document.getElementById('termsError');
+      
+      // Show error function
+      function showError(input, errorElement, message) {
+        input.classList.add('input-error');
+        input.classList.add('shake-animation');
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        
+        // Remove shake animation after it completes
+        setTimeout(() => {
+          input.classList.remove('shake-animation');
+        }, 500);
+      }
+      
+      // Clear error function
+      function clearError(input, errorElement) {
+        input.classList.remove('input-error');
+        errorElement.style.display = 'none';
+      }
+      
+      // Show success
+      function showSuccess(input) {
+        input.classList.add('input-valid');
+      }
+      
+      // Validation functions
+      function validateName(input, errorElement) {
+        // Name should contain only alphabets and be at least 3 characters
+        const nameRegex = /^[A-Za-z]{3,}$/;
+        
+        if (input.value.trim() === '') {
+          showError(input, errorElement, `${input.name} is required`);
+          return false;
+        } else if (!nameRegex.test(input.value.trim())) {
+          showError(input, errorElement, `${input.name} should contain only alphabets and be at least 3 characters`);
+          return false;
+        } else {
+          clearError(input, errorElement);
+          showSuccess(input);
+          return true;
+        }
+      }
+      
+      function validateFullName() {
+        const firstNameValid = validateName(firstName, firstNameError);
+        const lastNameValid = validateName(lastName, lastNameError);
+        
+        // Combined name should be at least 6 characters
+        if (firstNameValid && lastNameValid) {
+          const fullName = firstName.value.trim() + lastName.value.trim();
+          if (fullName.length < 6) {
+            showError(lastName, lastNameError, "Full name should be at least 6 characters");
+            return false;
+          }
+        }
+        
+        return firstNameValid && lastNameValid;
+      }
+      
+      function validateEmail() {
+        // Standard email pattern: name@domain.com
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (email.value.trim() === '') {
+          showError(email, emailError, 'Email is required');
+          return false;
+        } else if (!emailRegex.test(email.value.trim())) {
+          showError(email, emailError, 'Please enter a valid email (e.g., name@domain.com)');
+          return false;
+        } else {
+          clearError(email, emailError);
+          showSuccess(email);
+          return true;
+        }
+      }
+      
+      function validateUsername() {
+        if (username.value.trim() === '') {
+          showError(username, usernameError, 'Username is required');
+          return false;
+        } else if (username.value.trim().length < 4) {
+          showError(username, usernameError, 'Username should be at least 4 characters');
+          return false;
+        } else {
+          clearError(username, usernameError);
+          showSuccess(username);
+          return true;
+        }
+      }
+      
+      function validatePassword() {
+        if (password.value === '') {
+          showError(password, passwordError, 'Password is required');
+          return false;
+        } else if (password.value.length < 6) {
+          showError(password, passwordError, 'Password must be at least 6 characters');
+          return false;
+        } else {
+          clearError(password, passwordError);
+          showSuccess(password);
+          return true;
+        }
+      }
+      
+      function validateConfirmPassword() {
+        if (confirmPassword.value === '') {
+          showError(confirmPassword, confirmPasswordError, 'Please confirm your password');
+          return false;
+        } else if (confirmPassword.value !== password.value) {
+          showError(confirmPassword, confirmPasswordError, 'Passwords do not match');
+          return false;
+        } else {
+          clearError(confirmPassword, confirmPasswordError);
+          showSuccess(confirmPassword);
+          return true;
+        }
+      }
+      
+      function validatePhone() {
+        // Phone should contain exactly 10 digits
+        const phoneRegex = /^[0-9]{10}$/;
+        
+        if (phone.value.trim() === '') {
+          // Phone is optional, so no error if empty
+          clearError(phone, phoneError);
+          return true;
+        } else if (!phoneRegex.test(phone.value.trim())) {
+          showError(phone, phoneError, 'Phone number should contain exactly 10 digits');
+          return false;
+        } else {
+          clearError(phone, phoneError);
+          showSuccess(phone);
+          return true;
+        }
+      }
+      
+      function validateTerms() {
+        if (!terms.checked) {
+          termsError.style.display = 'block';
+          return false;
+        } else {
+          termsError.style.display = 'none';
+          return true;
+        }
+      }
+      
+      // Event listeners for real-time validation
+      firstName.addEventListener('blur', () => validateName(firstName, firstNameError));
+      lastName.addEventListener('blur', () => validateName(lastName, lastNameError));
+      lastName.addEventListener('blur', validateFullName);
+      email.addEventListener('blur', validateEmail);
+      username.addEventListener('blur', validateUsername);
+      password.addEventListener('blur', validatePassword);
+      confirmPassword.addEventListener('blur', validateConfirmPassword);
+      phone.addEventListener('blur', validatePhone);
+      terms.addEventListener('change', validateTerms);
+      
+      // Form submission
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Validate all fields
+        const isNameValid = validateFullName();
+        const isEmailValid = validateEmail();
+        const isUsernameValid = validateUsername();
+        const isPasswordValid = validatePassword();
+        const isConfirmPasswordValid = validateConfirmPassword();
+        const isPhoneValid = validatePhone();
+        const isTermsValid = validateTerms();
+        
+        if (isNameValid && isEmailValid && isUsernameValid && isPasswordValid && 
+            isConfirmPasswordValid && isPhoneValid && isTermsValid) {
+          // Form is valid, submit it
+          alert('Registration successful! Welcome to College Book Store.');
+          form.reset();
+          // Remove success styling
+          document.querySelectorAll('.input-valid').forEach(el => {
+            el.classList.remove('input-valid');
+          });
+          // form.submit();  // Uncomment this when connecting to backend
+        } else {
+          // Scroll to the first error
+          const firstError = document.querySelector('.error-message[style="display: block"]');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
       });
     });
   </script>
