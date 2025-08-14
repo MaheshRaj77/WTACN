@@ -259,6 +259,15 @@ function handleCoupon() {
   renderCart();
 }
 
+
+// Close cart popup
+function closeCartPopup() {
+  const cartPopup = document.getElementById('cart-popup');
+  if (cartPopup) {
+    cartPopup.style.display = 'none';
+  }
+}
+
 // Render cart items
 function renderCart() {
   const cartItemsContainer = document.getElementById('cart-items');
