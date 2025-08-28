@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+<!DOCTYPE bookstore [
+  <!ELEMENT bookstore (book+)>
+  <!ELEMENT book (title, author, isbn, publisher, edition, price)>
+  <!ELEMENT title (#PCDATA)>
+  <!ELEMENT author (#PCDATA)>
+  <!ELEMENT isbn (#PCDATA)>
+  <!ELEMENT publisher (#PCDATA)>
+  <!ELEMENT edition (#PCDATA)>
+  <!ELEMENT price (#PCDATA)>
+]>
+<bookstore>
+  <book>
+    <title>The Lord of the Rings</title>
+    <author>J.R.R. Tolkien</author>
+    <isbn>978-0-618-64015-7</isbn>
+    <publisher>Houghton Mifflin Harcourt</publisher>
+    <edition>1st Edition</edition>
+    <price>25.99</price>
+  </book>
+  <book>
+    <title>Pride and Prejudice</title>
+    <author>Jane Austen</author>
+    <isbn>978-1-5032-9056-3</isbn>
+    <publisher>Penguin Classics</publisher>
+    <edition>Modern Library Edition</edition>
+    <price>12.50</price>
+  </book>
+  <book>
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <isbn>978-0-06-112008-4</isbn>
+    <publisher>J.B. Lippincott &amp; Co.</publisher>
+    <edition>40th Anniversary Edition</edition>
+    <price>18.00</price>
+  </book>
+</bookstore>

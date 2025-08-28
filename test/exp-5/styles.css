@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 30px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.book-table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px #ccc;
+}
+
+.book-table th {
+  background: #888;
+  color: #fff;
+  padding: 10px;
+  font-size: 1.1em;
+}
+
+.book-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.book-table thead tr {
+  background-color: #808080;
+  color: #ffffff;
+}
+
+.book-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.title-col {
+  background: #e3f2fd;
+  color: #1565c0;
+  font-weight: bold;
+}
+
+.author-col {
+  background: #ffe082;
+  color: #bf360c;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.isbn-col {
+  background: #c8e6c9;
+  color: #1b5e20;
+}
+
+.publisher-col {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.edition-col {
+  background: #fff9c4;
+  color: #fbc02d;
+}
+
+.price-col {
+  background: #ffccbc;
+  color: #d84315;
+  font-weight: bold;
+}

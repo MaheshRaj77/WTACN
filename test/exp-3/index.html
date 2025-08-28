@@ -1,58 +1,479 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Client-Side Programming</title>
-    <style>
-      :root {
-        --primary: #4f46e5;
-        --muted: #4b5563;
-        --bg: #f9fafb;
-        --surface: #fff;
-        --border: #e5e7eb;
-        --radius: 8px;
-        --font: system-ui, sans-serif;
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Hub | Ultimate AI Tools Repository</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS v4.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Lucide Icons & AOS Animation Library -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* Custom animations and styles converted to CSS since Tailwind v4 handles configuration differently */
+    @keyframes blob {
+      0% {
+        transform: translate(0px, 0px) scale(1);
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      33% {
+        transform: translate(30px, -50px) scale(1.1);
       }
 
-      body {
-        font-family: var(--font);
-        background-color: var(--bg);
-        color: #333;
-        line-height: 1.6;
-        padding: 2rem;
+      66% {
+        transform: translate(-20px, 20px) scale(0.9);
       }
 
-      h1 {
-        color: var(--primary);
-        margin-bottom: 1rem;
+      100% {
+        transform: translate(0px, 0px) scale(1);
       }
+    }
 
-      p {
-        margin-bottom: 1.5rem;
-      }
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
 
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
-        background-color: var(--surface);
-        border-radius: var(--radius);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+      animation-delay: 4s;
+    }
+
+    .headline {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #1f2937;
+    }
+
+    .dark .headline {
+      color: #f9fafb;
+    }
+
+    /* Ensure dark mode works properly */
+    .dark {
+      color-scheme: dark;
+    }
+
+    /* Force dark mode styles */
+    html.dark {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+
+    html.dark body {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+
+    /* Fix backdrop blur for older browsers */
+    .backdrop-blur-sm {
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    /* Ensure theme transitions are smooth */
+    html,
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .headline {
+        color: #f9fafb;
       }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Experiment 3: Client-Side Programming</h1>
-      <p>This is a placeholder for the JavaScript client-side programming experiment.</p>
-      <p>Coming soon...</p>
+    }
+  </style>
+
+  <!-- All custom styles are now implemented using Tailwind utility classes below. -->
+
+</head>
+
+<!-- 2) Body with a background image -->
+<!-- 3) Control repetition with bg-repeat -->
+
+<body class="font-sans antialiased text-gray-800 dark:text-gray-200 min-h-screen overflow-x-hidden">
+
+  <!-- Main Background -->
+  <div class="fixed inset-0 z-[-2] overflow-hidden">
+    <!-- Base gradient -->
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 transition-colors duration-500">
     </div>
-  </body>
+
+    <!-- Animated gradient blobs -->
+    <div
+      class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 dark:bg-purple-900/30 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob">
+    </div>
+    <div
+      class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 dark:bg-yellow-900/30 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob animation-delay-2000">
+    </div>
+    <div
+      class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 dark:bg-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-70 animate-blob animation-delay-4000">
+    </div>
+
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-10 dark:opacity-30"
+      style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;100&quot; height=&quot;100&quot; viewBox=&quot;0 0 100 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z&quot; fill=&quot;currentColor&quot; fill-opacity=&quot;0.05&quot;/%3E%3C/svg%3E')">
+    </div>
+
+    <!-- Noise texture -->
+    <div class="absolute inset-0 opacity-[0.15] dark:opacity-20 mix-blend-soft-light"
+      style="background-image: url('data:image/svg+xml,%3Csvg viewBox=&quot;0 0 200 200&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cfilter id=&quot;noiseFilter&quot;%3E%3CfeTurbulence type=&quot;fractalNoise&quot; baseFrequency=&quot;0.65&quot; numOctaves=&quot;3&quot; stitchTiles=&quot;stitch&quot;/%3E%3C/filter%3E%3Crect width=&quot;100%&quot; height=&quot;100%&quot; filter=&quot;url(%23noiseFilter)&quot;/%3E%3C/svg%3E')">
+    </div>
+  </div>
+
+  <!-- Theme Toggle Button -->
+  <button id="theme-toggle"
+    class="fixed top-4 right-4 z-50 p-2 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:bg-white/80 dark:hover:bg-gray-800/80">
+    <i data-lucide="sun" class="w-6 h-6 text-yellow-500" style="display: none;"></i>
+    <i data-lucide="moon" class="w-6 h-6 text-gray-800 dark:text-gray-200" style="display: block;"></i>
+  </button>
+
+  <!-- Navigation -->
+  <nav
+    class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+            AI Hub</h1>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:block">
+          <div id="desktop-nav" class="ml-10 flex items-baseline space-x-4">
+            <!-- Navigation items -->
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button type="button"
+            class="bg-white dark:bg-gray-800 p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 rounded-md">
+            <span class="sr-only">Open main menu</span>
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8">
+            <a href="#content"
+              class="text-gray-500 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Content</a>
+            <a href="#image"
+              class="text-gray-500 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Image</a>
+            <a href="#coding"
+              class="text-gray-500 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Coding</a>
+            <a href="#css-examples"
+              class="text-gray-500 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">CSS
+              Examples</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-gray-900">
+    <!-- Hero Section -->
+    <section class="text-center py-16 px-4">
+      <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+        Find the Perfect
+        <span class="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          AI Tool
+        </span>
+        for Your Needs
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto" data-aos="fade-up"
+        data-aos-delay="100">
+        Browse our comprehensive collection of AI tools organized by category, with pricing information and direct
+        links. Boost your productivity with cutting-edge AI solutions.
+      </p>
+      <!-- Search Bar -->
+      <div class="max-w-2xl mx-auto mb-16">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i data-lucide="search" class="h-5 w-5 text-gray-400"></i>
+          </div>
+          <input type="text"
+            class="block w-full pl-10 pr-3 py-4 border border-gray-300 dark:border-gray-700 rounded-xl leading-5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm shadow-sm"
+            placeholder="Search for AI tools by name or category...">
+        </div>
+      </div>
+
+      <!-- Featured Tools Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+          <div
+            class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <i data-lucide="message-circle" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">ChatGPT</h3>
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100">
+            Free / Paid
+          </span>
+        </div>
+
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+          <div
+            class="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <i data-lucide="image" class="w-6 h-6 text-purple-600 dark:text-purple-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">DALL-E</h3>
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100">
+            Free / Paid
+          </span>
+        </div>
+
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+          <div
+            class="w-12 h-12 bg-orange-100 dark:bg-orange-900/50 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <i data-lucide="code" class="w-6 h-6 text-orange-600 dark:text-orange-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">GitHub Copilot</h3>
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100">
+            Paid
+          </span>
+        </div>
+
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+          <div
+            class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <i data-lucide="layout" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Notion AI</h3>
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100">
+            Paid
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Creation AI Section -->
+    <section id="content" class="mb-24">
+      <div class="flex items-center mb-8" data-aos="fade-right">
+        <div class="w-1 h-8 bg-blue-600 rounded-full mr-4"></div>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Content Creation AI</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+        <!-- Card 1 -->
+        <div data-aos="fade-up"
+          class="bg-white dark:bg-gray-800/50 rounded-xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ChatGPT</h3>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">Free
+                / Paid</span>
+            </div>
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+              <i data-lucide="message-circle" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Conversational AI for text generation, content writing, and
+            creative tasks.</p>
+          <a href="#" target="_blank" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            Visit Site &rarr;
+          </a>
+        </div>
+        <!-- Card 2 -->
+        <div data-aos="fade-up" data-aos-delay="100"
+          class="bg-white dark:bg-gray-800/50 rounded-xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Jasper</h3>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200">Paid</span>
+            </div>
+            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+              <i data-lucide="edit-3" class="w-6 h-6 text-green-600 dark:text-green-400"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">AI content platform for marketing teams to create blog posts,
+            ads, and emails.</p>
+          <a href="#" target="_blank" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            Visit Site &rarr;
+          </a>
+        </div>
+        <!-- Card 3 -->
+        <div data-aos="fade-up" data-aos-delay="200"
+          class="bg-white dark:bg-gray-800/50 rounded-xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Midjourney</h3>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200">Paid</span>
+            </div>
+            <!-- 2) Single element with a background image -->
+            <div
+              class="w-12 h-12 bg-pink-100 dark:bg-pink-900 rounded-lg flex items-center justify-center bg-cover bg-center bg-[url('https://cdn.iconscout.com/icon/free/png-256/free-midjourney-8781533-7132533.png')]">
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">AI art generator that creates stunning images from text
+            prompts via Discord.</p>
+          <a href="#" target="_blank" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            Visit Site &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CSS Examples Section -->
+    <section id="css-examples"
+      class="mb-24 p-8 bg-white dark:bg-gray-800/50 rounded-lg shadow-md border dark:border-gray-700"
+      data-aos="fade-up">
+      <h3 class="font-bold text-2xl mb-6 dark:text-white">CSS Concept Examples</h3>
+
+      <!-- 1) Different font styles -->
+      <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2 dark:text-gray-100">1. Font & Cursor Styles</h4>
+        <p><b>This is normal bold text.</b></p>
+        <p><b class="headline">This is headline style bold (using a custom CSS class).</b></p>
+        <div class="mt-4 space-x-6">
+          <a href="#" class="cursor-crosshair text-green-600 hover:underline">Crosshair Cursor Link</a>
+          <a href="#" class="cursor-help text-indigo-600 hover:underline">Help Cursor Link</a>
+        </div>
+      </div>
+
+      <!-- 2) Link State Styling with Tailwind CSS -->
+      <div class="mb-6">
+        <h4 class="font-semibold text-lg mb-2 dark:text-gray-100">2. Link State Styling with Tailwind CSS</h4>
+        <div class="space-y-3">
+          <div>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Default state:</span>
+            <a href="#css-examples" class="block text-blue-600 dark:text-blue-400 transition-colors">
+              This link shows default color
+            </a>
+          </div>
+          <div>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Visited state:</span>
+            <a href="#css-examples"
+              class="block visited:text-purple-600 dark:visited:text-purple-400 transition-colors">
+              This link changes color when visited
+            </a>
+          </div>
+          <div>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Hover state:</span>
+            <a href="#css-examples"
+              class="block text-gray-600 hover:text-red-500 hover:underline dark:text-gray-300 dark:hover:text-red-400 transition-colors">
+              This link changes color on hover
+            </a>
+          </div>
+          <div>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Active state:</span>
+            <a href="#css-examples"
+              class="block text-gray-600 active:text-yellow-500 dark:text-gray-300 dark:active:text-yellow-400 transition-colors">
+              This link changes color when clicked
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+      <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mb-4">
+        AI Hub</h3>
+      <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-6">Your comprehensive directory of artificial
+        intelligence tools and resources.</p>
+      <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 AI Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Initialize AOS (Animate on Scroll)
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Theme Toggle Logic - Enhanced for better reliability
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    // Function to update icons based on current theme
+    function updateThemeIcons() {
+      const isDark = htmlElement.classList.contains('dark');
+      const sunIcon = themeToggleBtn.querySelector('[data-lucide="sun"]');
+      const moonIcon = themeToggleBtn.querySelector('[data-lucide="moon"]');
+
+      if (isDark) {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+
+    // Set initial theme based on localStorage or system preference
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+
+      // Update icons after setting theme
+      setTimeout(updateThemeIcons, 100);
+    }
+
+    // Handle theme toggle button click
+    function toggleTheme() {
+      const isDark = htmlElement.classList.contains('dark');
+
+      if (isDark) {
+        htmlElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        htmlElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+
+      updateThemeIcons();
+    }
+
+    // Initialize theme on page load
+    initializeTheme();
+
+    // Add event listener for theme toggle
+    themeToggleBtn.addEventListener('click', toggleTheme);
+
+    // Re-initialize icons after Lucide is loaded
+    setTimeout(() => {
+      lucide.createIcons();
+      updateThemeIcons();
+    }, 200);
+  </script>
+</body>
+
 </html>

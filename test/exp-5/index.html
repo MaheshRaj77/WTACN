@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Experiment 5</title>
-    <style>
-      :root {
-        --primary: #4f46e5;
-        --muted: #4b5563;
-        --bg: #f9fafb;
-        --surface: #fff;
-        --border: #e5e7eb;
-        --radius: 8px;
-        --font: system-ui, sans-serif;
-      }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Collection (XML/XSLT)</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --muted: #4b5563;
+      --bg: #f9fafb;
+      --surface: #fff;
+      --border: #e5e7eb;
+      --radius: 8px;
+      --font: system-ui, sans-serif;
+    }
 
-      body {
-        font-family: var(--font);
-        background-color: var(--bg);
-        color: #333;
-        line-height: 1.6;
-        padding: 2rem;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      h1 {
-        color: var(--primary);
-        margin-bottom: 1rem;
-      }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: #222;
+      line-height: 1.6;
+      padding: 2rem;
+      text-align: center;
+    }
 
-      p {
-        margin-bottom: 1.5rem;
-      }
+    h1 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
 
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
-        background-color: var(--surface);
-        border-radius: var(--radius);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Experiment 5: Placeholder</h1>
-      <p>This is a placeholder for experiment 5.</p>
-      <p>Coming soon...</p>
-    </div>
-  </body>
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      color: #4f46e5;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-bottom: 1px dashed #4f46e5;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #222;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Book Collection</h1>
+    <p>
+      <a href="books.xml">View the Book Table (XML + XSLT)</a>
+    </p>
+    <p>
+      <small>Open in Firefox or a browser that supports XML+XSLT rendering.</small>
+    </p>
+  </div>
+</body>
+
 </html>
